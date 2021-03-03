@@ -1,3 +1,6 @@
+import 'twin.macro'
+
+import Counter from '@components/Counter'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -10,20 +13,22 @@ const Home = (): JSX.Element => {
   const { t } = useTranslation('common')
 
   return (
-    <div>
+    <section className="h-full grid place-items-center">
       <Head>
         <title>{t('page-title')}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1>{t('welcome-message')}</h1>
+      <main className="flex flex-col justify-center">
+        <h1 className="text-2xl font-bold">{t('welcome-message')}</h1>
 
         <Link href="/" locale={router.locale === 'en' ? 'es' : 'en'}>
           <button>{t('change-locale')}</button>
         </Link>
+
+        <Counter tw="mt-8" />
       </main>
-    </div>
+    </section>
   )
 }
 

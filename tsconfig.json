@@ -24,13 +24,17 @@
       ],
       "@pages/*": [
         "pages/*"
+      ],
+      "@/*": [
+        "./*"
       ]
     }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "twin.d.ts"
   ],
   "exclude": [
     "node_modules"
