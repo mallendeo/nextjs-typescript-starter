@@ -1,20 +1,29 @@
 import { ClassNamesArg } from '@emotion/react'
 import cx from 'classnames'
 import { useAtom } from 'jotai'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import tw, { styled } from 'twin.macro'
 
 import { countAtom, decCountAtom, incCountAtom } from '@/state/counter'
 
 const StyledBtn = styled.button(({ disabled }) => [
   tw`h-12 font-bold rounded-lg bg-blue-100 flex-1`,
-  disabled && tw`bg-gray-100 cursor-default`,
+  tw`border border-blue-400`,
+  disabled && tw`bg-gray-100 border-gray-400 cursor-default opacity-50`,
 ])
 
-const Counter: FC<{ className?: ClassNamesArg }> = (props) => {
-  const [count] = useAtom(countAtom)
+type Props = { className?: ClassNamesArg; start?: number }
+
+const Counter: FC<Props> = (props) => {
+  const [count, setCount] = useAtom(countAtom)
   const [, incCount] = useAtom(incCountAtom)
   const [, decCount] = useAtom(decCountAtom)
+
+  useEffect(() => {
+    if (typeof props.start !== 'undefined') {
+      setCount(props.start)
+    }
+  }, [setCount, props.start])
 
   return (
     <div {...props} className={cx(['flex items-center', props.className])}>
